@@ -56,6 +56,10 @@
       cursor: pointer;
     }
 
+    svg[data-mode="live"] .pointer {
+      transition: transform 0.2s ease;
+    }
+
     .hours > * {
       fill: #FD7F00;
     }
@@ -74,8 +78,7 @@
       font-family: Arial;
       fill: #FD7F00;
       font-weight: bold;
-      font-size: 10pt;
-      display: none;
+      font-size: 10px;
     }
 
     .label.shadow {
@@ -94,7 +97,7 @@
     #liveButton:active > rect {
       fill: url(#activeLiveButtonGradient);
     }
-    #liveButton.selected > rect {
+    svg[data-mode="live"] #liveButton > rect {
       fill: url(#selectedLiveButtonGradient);
     }
 
@@ -233,7 +236,7 @@
       </g>
     </g>
 
-    <g id="liveButton" class="selected" transform="translate(100, 170)">
+    <g id="liveButton" transform="translate(100, 170)">
       <rect rx="2" ry="2" x="-15" y="-9" width="30" height="16" />
       <text alignment-baseline="middle">
         LIVE
@@ -244,21 +247,25 @@
       Labels
     -->
     
-    <g transform="translate(130, 100)">
+    <g transform="translate(150, 100)">
       <g transform="translate(0, -6)">
+        <!--
         <text class="label shadow" x="1" y="1" alignment-baseline="middle">
           10:09
         </text>
-        <text class="label" alignment-baseline="middle">
+        -->
+        <text id="timeLabel" class="label" alignment-baseline="middle">
           10:09
         </text>
       </g>
 
       <g transform="translate(0, 6)">
+        <!--
         <text class="label shadow" x="1" y="1"  alignment-baseline="middle">
           AM
         </text>
-        <text class="label" x="0" y="0"  alignment-baseline="middle">
+        -->
+        <text id="ampmLabel" class="label" x="0" y="0"  alignment-baseline="middle">
           AM
         </text>
       </g>
@@ -271,21 +278,21 @@
     
     <g class="pointers" transform="translate(100 100)">
       <g filter="url(#pointerDropShadow)">
-        <g id="pointerHours" class="pointer hours" transform="rotate(300, 0, 0)" mask="url(#pointerHoursMask)">
+        <g id="pointerHours" class="pointer hours"  mask="url(#pointerHoursMask)">
           <rect x="-5" y="-50" width="10" height="60" />
           <circle fill="red" cx="0" cy="-55" r="10"/>
         </g>
       </g>
 
       <g filter="url(#pointerDropShadow)">
-        <g id="pointerMinutes" class="pointer minutes" transform="rotate(54, 0, 0)" mask="url(#pointerMinutesMask)">
+        <g id="pointerMinutes" class="pointer minutes" mask="url(#pointerMinutesMask)">
           <rect x="-3.75" y="-80" width="7.5" height="90" />     
           <circle fill="red" cx="0" cy="-70" r="7.5"/>
         </g>
       </g>
 
       <g filter="url(#pointerDropShadow)">
-        <g id="pointerSeconds" class="pointer seconds" transform="rotate(0, 0, 0)">
+        <g id="pointerSeconds" class="pointer seconds">
           <rect x="-1" y="-90" width="2" height="100" />
           <rect x="-2" width="4" height="20" />
           <circle r="6" />

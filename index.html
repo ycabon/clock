@@ -37,25 +37,40 @@
   </style>
 </head>
 <body>
-  <div class="outter">
+<!--   <div class="outter">
     <div class="container">
       <object type="image/svg+xml" data="src/clock.svg"></object>
-<!--       <img src="src/clock.svg"/> -->
     </div>
     <div class="container-small">
       <object type="image/svg+xml" data="src/clock.svg"></object>
-<!--       <img src="src/clock.svg"/> -->
     </div>
     <div class="container-small">
       <img src="src/clock.svg"/>
     </div>
-  </div>
+  </div> -->
 
-  <div id="clock" style="width: 300px; height: 300px"></div>
+  <div id="clock" style="width: 300px; height: 300px; float:left"></div>
   <script>
     clock = new Clock({
-      el: "clock"
+      el: "clock"/*,
+      skin: "./src/Swiss_railway_clock.svg"*/
     });
   </script>
+  
+  <div id="swissClock" style="width: 300px; height: 300px; float:left"></div>
+  <script>
+    swissClock = new Clock({
+      el: "swissClock",
+      skin: "./src/Swiss_railway_clock.svg"
+    });
+  </script>
+  
+<!--   <div id="quartzClock" style="width: 300px; height: 300px"></div>
+  <script>
+    swissClock = new Clock({
+      el: "quartzClock",
+      skin: "./src/Qtz_watch.svg"
+    });
+  </script> -->
 </body>
 </html>

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+  <script src="http://js.arcgis.com/3.14/"></script>
+  <title></title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #mapDiv {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    #clockDiv {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      bottom: 10px;
+      left: 10px;
+    }
+  </style>
+
+  <script>
+    require({
+      packages: [{
+        name: "local",
+        location: window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + "/src"
+      }]
+    }, [
+      "esri/map",
+      "esri/TimeExtent",
+
+      "esri/layers/ArcGISDynamicMapServiceLayer",
+      "esri/layers/ImageParameters",
+
+      "local/Clock",
+
+      "dojo/domReady!"
+    ], function(
+      Map, TimeExtent,
+      ArcGISDynamicLayer, ImageParameters,
+      Clock
+    ) { 
+      map = new Map("mapDiv", {
+        center: [-117.86, 33.86],
+        zoom: 10,
+        basemap: "dark-gray"
+      });
+
+      clock = new Clock({
+        el: "clockDiv"
+      });
+
+      var imageParameters = new ImageParameters();
+      imageParameters.format = "png32";
+      trafficLayer = new ArcGISDynamicLayer("//traffic.arcgis.com/arcgis/rest/services/World/Traffic/MapServer", {
+        imageParameters: imageParameters
+      });
+      trafficLayer.on("load", function() {
+        map.setTimeExtent(new TimeExtent(new Date(clock.time), new Date(clock.time)));
+        clock.on("time-change", function(value) {
+          if (clock.mode === "manual") {
+            map.setTimeExtent(new TimeExtent(new Date(clock.time), new Date(clock.time)));
+          }
+          else {
+            map.setTimeExtent(null);
+          }
+        });
+      });
+      map.addLayer(trafficLayer);
+    });
+  </script>
+</head>
+<body class="claro">
+  <div id="mapDiv"></div>
+  <div id="clockDiv"></div>
+</body>
+</html>
