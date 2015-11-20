@@ -1,9 +1,9 @@
 # clock
 just a clock...
 
-https://devtopia.esri.com/pages/yann6817/clock/
+https://ycabon.github.io/clock/
 
 using the traffic layer  
-https://devtopia.esri.com/pages/yann6817/clock/traffic.html  
-https://devtopia.esri.com/pages/yann6817/clock/traffic-swiss.html
+https://ycabon.github.io/clock/traffic.html  
+https://ycabon.github.io/clock/traffic-swiss.html
 
